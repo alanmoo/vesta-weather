@@ -1,0 +1,23 @@
+{
+  "name": "vesta-weather",
+  "version": "1.0.0",
+  "description": "Vestaboard visual weather installable",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "vestaboard",
+    "vestaboard-installable"
+  ],
+  "author": "Alan Mooiman",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0"
+  }
+}
