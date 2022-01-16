@@ -1,50 +1,47 @@
-require('dotenv').config()
+import axios, { Method } from 'axios';
+import fetchWeather from './weatherService';
+import { MessageResponse } from './types';
 
-import * as weather from './weather.json'
-import axios, { AxiosRequestConfig, Method } from 'axios';
+require('dotenv').config();
 
-import {MessageResponse} from './types';
+const http = require('http');
 
 const headers = {
-    'X-Vestaboard-Api-Key': process.env.VB_API_KEY,
-    'X-Vestaboard-Api-Secret': process.env.VB_API_SECRET
-  };
-
-const fetchWeather = () => {
-    return weather;
+  'X-Vestaboard-Api-Key': process.env.VB_API_KEY,
+  'X-Vestaboard-Api-Secret': process.env.VB_API_SECRET,
 };
 
-const parseWeather = (measurement: String, values:[Number]) => {
-    // figure out what colors to return
-    let res=''
-    return res;
-}
+const postToVestaboard = async (postMessage: String): Promise<MessageResponse> => {
+  // if (typeof postMessage === 'string') {
+  //   if (containsInvalidCharacters(postMessage)) {
+  //     throw new Error('Input contains one or more invalid characters.');
+  //   }
+  // }
+  const url = `https://platform.vestaboard.com/subscriptions/${process.env.SUBSCRIPTION_ID}/message`;
+  const data = Array.isArray(postMessage)
+    ? JSON.stringify({ characters: postMessage })
+    : JSON.stringify({ text: postMessage });
 
-// const request =   async (endpoint = '', options: APIOptions): Promise<AxiosResponse> {
-//     const url = this.baseUrl + endpoint;
+  const options = {
+    url, method: 'POST' as Method, headers, data,
+  };
+  const response = await axios(options);
+  const { message } = response.data;
+  return message as MessageResponse;
+};
 
-//     const text = options.data;
-//     const method = options.method;
-//     const config: AxiosRequestConfig = { url, method, headers, data: text };
+const host = 'localhost';
+const port = 8000;
 
-//     return axios(config);
-//   }
+const requestListener = (req, res) => {
+  res.writeHead(200);
+  const message = `Hello, world! It's ${Date().toString()}`;
+  fetchWeather.then((data) => console.log(data));
+  postToVestaboard(message);
+  res.end(message);
+};
 
-const postMessage = async (postMessage:String):Promise<MessageResponse> => {
-    // if (typeof postMessage === 'string') {
-    //   if (containsInvalidCharacters(postMessage)) {
-    //     throw new Error('Input contains one or more invalid characters.');
-    //   }
-    // }
-    const url = `https://platform.vestaboard.com/subscriptions/${process.env.SUBSCRIPTION_ID}/message`;
-    const data = Array.isArray(postMessage)
-      ? JSON.stringify({ characters: postMessage })
-      : JSON.stringify({ text: postMessage });
-
-    const options = { url, method: 'POST' as Method, headers, data };
-    const response = await axios(options);
-    const { message } = response.data;
-    return message as MessageResponse;
-  }
-
-postMessage(`Hello, world! It's ${Date().toString()}`);
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
+});

@@ -1,8 +1,5 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "resolveJsonModule": true
-    },
+    "compilerOptions": {},
     "exclude": [
         "node_modules"
     ]
