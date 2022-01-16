@@ -1,5 +1,21 @@
 require('dotenv').config();
 const https = require('https');
+import { hourlyWeather } from './types';
+
+
+const darkSkyNormalization = (data) => {
+    let hourlyData = data.hourly.data;
+    const normalized:[hourlyWeather] = hourlyData.map(hour=>{
+        return {
+            time: hour.time,
+            temperature: hour.temperature,
+            humidity: hour.humidity,
+            windSpeed: hour.windSpeed,
+            precipitation: hour.precipProbability,
+        }
+    });
+    return normalized;
+}
 
 const fetchWeather = new Promise((resolve, reject) => {
   let hourlyData = {};
@@ -18,8 +34,12 @@ const fetchWeather = new Promise((resolve, reject) => {
 
     response.on('end', async () => {
       const body = await JSON.parse(data);
-      hourlyData = body.hourly.data;
-      resolve(hourlyData);
+      //Make sure we got a decent response from the API
+      if(body.latitude){
+        resolve(darkSkyNormalization(body));
+      } else {
+          reject("Bad weather data");
+      }
     });
   });
 
