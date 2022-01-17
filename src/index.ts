@@ -17,10 +17,10 @@ const port = 8000;
 
 const postToVestaboard = async (postMessage: string|number[][]): Promise<MessageResponse> => {
   // if (typeof postMessage === 'object') {
-    // console.log('array!');
-    // if (containsInvalidCharacters(postMessage)) {
-    //   throw new Error('Input contains one or more invalid characters.');
-    // }
+  // console.log('array!');
+  // if (containsInvalidCharacters(postMessage)) {
+  //   throw new Error('Input contains one or more invalid characters.');
+  // }
   // }
   const url = `https://platform.vestaboard.com/subscriptions/${process.env.SUBSCRIPTION_ID}/message`;
   const data = Array.isArray(postMessage)
@@ -36,12 +36,16 @@ const postToVestaboard = async (postMessage: string|number[][]): Promise<Message
 
 const requestListener = (req, res) => {
   res.writeHead(200);
-  // const message = `Hello, world! It's ${Date().toString()}`.split('');
-  // message.push('68');
-  // const message = [[0,0,0,0,0,0,0,0,0,0,56,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,68,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
-  // fetchWeather.then((data:[hourlyWeather]) => formatForVestaboard(data)).catch(error=>{console.error(error)});
-  postToVestaboard(message);
-  res.end("Push it baby");
+  let message;
+  fetchWeather.then(
+    (data:[hourlyWeather]) => {
+      message = formatForVestaboard(data);
+      postToVestaboard(message);
+    },
+  ).catch(
+    (error) => { console.error(error); },
+  );
+  res.end('Push it baby');
 };
 
 const server = http.createServer(requestListener);
