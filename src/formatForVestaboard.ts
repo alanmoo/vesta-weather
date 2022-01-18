@@ -37,9 +37,9 @@ function measurementToColors(data: number[], measurement: string) {
     if (hour < min) {
       return colors[0];
     } if (hour > max) {
-      return colors[colors.length];
+      return colors[colors.length - 1];
     }
-    return colors[Math.floor((hour - min) / range)];
+    return colors[Math.ceil((hour - min) / range)];
   });
   coloredData.unshift(indicator);
   return coloredData;
@@ -75,7 +75,8 @@ const formatForVestaboard = (hourlyData: [hourlyWeather]) => {
   const windRowData = rowStringToData(windRowStrings);
   const precipRowData = rowStringToData(precipRowStrings);
 
-  return [row1, tempRowData, humidityRowData, windRowData, precipRowData, row6];
+  const res = [row1, tempRowData, humidityRowData, windRowData, precipRowData, row6];
+  return res;
 };
 
 export default formatForVestaboard;
