@@ -5,7 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "test",
-    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
+    "build":"tsc",
+    "start":"node build/index.js"
   },
   "keywords": [
     "vestaboard",
