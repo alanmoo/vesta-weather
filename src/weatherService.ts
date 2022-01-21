@@ -15,7 +15,7 @@ const darkSkyNormalization = (data) => {
   return normalized;
 };
 
-const fetchWeather = new Promise((resolve, reject) => {
+const fetchWeather = () => new Promise((resolve, reject) => {
   const options = {
     hostname: 'api.darksky.net',
     port: 443,
@@ -46,5 +46,4 @@ const fetchWeather = new Promise((resolve, reject) => {
 
   weatherRequest.end();
 });
-
 export default fetchWeather;

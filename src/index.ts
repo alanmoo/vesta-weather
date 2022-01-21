@@ -37,7 +37,7 @@ const postToVestaboard = async (postMessage: string|number[][]): Promise<Message
 const requestListener = (req, res) => {
   res.writeHead(200);
   let message;
-  fetchWeather.then(
+  fetchWeather().then(
     (data:[hourlyWeather]) => {
       message = formatForVestaboard(data);
       postToVestaboard(message);
