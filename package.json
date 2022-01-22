@@ -2,12 +2,14 @@
   "name": "vesta-weather",
   "version": "0.0.1",
   "description": "Vestaboard visual weather functions, to be used on your own Node server",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://github.com/alanmoo/vesta-weather",
   "scripts": {
     "test": "test",
     "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
     "build":"tsc",
-    "start":"node build/index.js"
+    "start":"node dist/index.js"
   },
   "keywords": [
     "vestaboard",
@@ -27,7 +29,9 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "dotenv": "^10.0.0",
-    "vestaboard-api": "^1.0.8"
-  }
+    "dotenv": "^10.0.0"
+  },
+  "files":[
+    "dist/**"
+  ]
 }

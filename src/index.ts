@@ -1,7 +1,6 @@
 import axios, { Method } from 'axios';
 import fetchWeather from './weatherService';
 import formatForVestaboard from './formatForVestaboard';
-// import { Vesta } from 'vestaboard-api';
 import { hourlyWeather, MessageResponse } from './types';
 
 require('dotenv').config();
@@ -12,12 +11,6 @@ const headers = {
 };
 
 const postToVestaboard = async (postMessage: string|number[][]): Promise<MessageResponse> => {
-  // if (typeof postMessage === 'object') {
-  // console.log('array!');
-  // if (containsInvalidCharacters(postMessage)) {
-  //   throw new Error('Input contains one or more invalid characters.');
-  // }
-  // }
   const url = `https://platform.vestaboard.com/subscriptions/${process.env.SUBSCRIPTION_ID}/message`;
   const data = Array.isArray(postMessage)
     ? JSON.stringify({ characters: postMessage })

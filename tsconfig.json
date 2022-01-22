@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "outDir": "build"
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "declaration": true,
     },
-    "exclude": [
-        "node_modules"
-    ],
     "strict": true,
 }
