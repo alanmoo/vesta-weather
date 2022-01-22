@@ -1,7 +1,7 @@
 {
   "name": "vesta-weather",
-  "version": "1.0.0",
-  "description": "Vestaboard visual weather installable",
+  "version": "0.0.1",
+  "description": "Vestaboard visual weather functions, to be used on your own Node server",
   "main": "index.ts",
   "scripts": {
     "test": "test",
