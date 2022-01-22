@@ -15,7 +15,7 @@ const darkSkyNormalization = (data) => {
   return normalized;
 };
 
-const fetchWeather = () => new Promise((resolve, reject) => {
+const fetchWeather = () => new Promise<[hourlyWeather]>((resolve, reject) => {
   const options = {
     url: `https://api.darksky.net/forecast/${process.env.DARK_SKY_KEY}/40.7318,-73.9891?exclude=%5Bminutely,currently,daily,alerts,flags%5D`,
     method: 'GET' as Method,
