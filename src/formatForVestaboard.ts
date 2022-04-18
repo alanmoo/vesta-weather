@@ -54,9 +54,20 @@ export const rowStringToData = (rowString) => {
   return rowData;
 };
 
+export const generateTimeRow = () => {
+  let thisHour = new Date().getHours();
+  const row = Array(22).fill(' ');
+  // I think doing this with a loop is clearer than other approaches, and it's only 22 loops.
+  for (let i = 1; i < 21; i += 1) {
+    if (thisHour === 24) { row[i] = 'm'; } else if (thisHour % 12 === 0) { row[i] = 'n'; }
+    thisHour += 1;
+  }
+  return row;
+};
+
 const formatForVestaboard = (hourlyData: [hourlyWeather]) => {
   const row1 = rowStringToData('NYC Weather           '.split(''));
-  const row6 = rowStringToData('                      '.split(''));
+  const timeRow = rowStringToData(generateTimeRow());
   const temperature: number[] = []; const humidity = []; const wind = []; const
     precipitation = [];
   for (let i = 0; i < vestaWidth - 1; i += 1) {
@@ -75,7 +86,7 @@ const formatForVestaboard = (hourlyData: [hourlyWeather]) => {
   const windRowData = rowStringToData(windRowStrings);
   const precipRowData = rowStringToData(precipRowStrings);
 
-  const res = [row1, tempRowData, humidityRowData, windRowData, precipRowData, row6];
+  const res = [row1, tempRowData, humidityRowData, windRowData, precipRowData, timeRow];
   return res;
 };
 
