@@ -59,9 +59,8 @@ export const generateTimeRow = () => {
   const row = Array(22).fill(' ');
   // I think doing this with a loop is clearer than other approaches, and it's only 22 loops.
   for (let i = 1; i < 21; i += 1) {
-    if (thisHour === 0) { row[i] = 'm'; } else if (thisHour === 12) { row[i] = 'n'; }
+    if (thisHour === 0 || thisHour === 24) { row[i] = 'm'; } else if (thisHour === 12 || thisHour === 36) { row[i] = 'n'; }
     thisHour += 1;
-    if (thisHour === 25) { thisHour = 1; }
   }
   return row;
 };

@@ -1,6 +1,6 @@
 {
   "name": "vesta-weather",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Vestaboard visual weather functions, to be used on your own Node server",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
