@@ -10,8 +10,8 @@ function measurementToColors(data: number[], measurement: string) {
   let indicator;
   switch (measurement) {
     case 'temperature':
-      min = 15;
-      max = 95;
+      min = 20;
+      max = 90;
       indicator = '°';
       break;
     case 'humidity':
@@ -25,7 +25,7 @@ function measurementToColors(data: number[], measurement: string) {
       indicator = 'P';
       break;
     case 'wind':
-      min = 5;
+      min = 4;
       max = 25;
       indicator = 'W';
       break;
@@ -55,7 +55,9 @@ export const rowStringToData = (rowString) => {
 };
 
 export const generateTimeRow = () => {
-  let thisHour = new Date().getHours();
+  const now = new Date();
+  const options = { timeZone: 'America/New_York', hour: '2-digit' as '2-digit', hourCycle: 'h24' as 'h24' };
+  let thisHour = parseInt(Intl.DateTimeFormat('en-US', options).format(now), 10);
   const row = Array(22).fill(' ');
   // I think doing this with a loop is clearer than other approaches, and it's only 22 loops.
   for (let i = 1; i < 21; i += 1) {
