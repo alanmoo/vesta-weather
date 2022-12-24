@@ -9,5 +9,6 @@ test('weatherService fetches data', async () => {
 test('hourlyWeather is formatted to be useful', async () => {
   const data: [hourlyWeather] = await fetchWeather();
   console.log('Weather conditions fetched:', Object.keys(data[0]));
+  console.log('Weather: ', data);
   expect(<hourlyWeather>data[0]);
 });

@@ -7,9 +7,9 @@ const weatherKitNormalization = (data:any) => {
   const hourlyData = data.forecastHourly.hours;
   const normalized: [hourlyWeather] = hourlyData.map((hour:WeatherKitHourlyForecast) => ({
     time: hour.forecastStart,
-    temperature: hour.temperature,
+    temperature: hour.temperature * (9 / 5) + 32,
     humidity: hour.humidity,
-    windSpeed: hour.windSpeed,
+    windSpeed: hour.windSpeed * 0.62137,
     precipitation: hour.precipitationChance,
   }));
   return normalized;
