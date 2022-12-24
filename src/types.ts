@@ -4,7 +4,6 @@ export interface MessageResponse {
   created: number;
 }
 
-
 export interface hourlyWeather {
   time: number;
   temperature: number;
