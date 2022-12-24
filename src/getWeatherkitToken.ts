@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
+import jwt from 'jsonwebtoken';
+
+import fs from 'fs';
 
 const header = {
   alg: 'ES256',

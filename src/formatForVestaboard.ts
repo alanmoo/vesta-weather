@@ -5,8 +5,8 @@ const vestaWidth = 22;
 const colors = ['⬛', '🟪', '🟦', '🟩', '🟨', '🟧', '🟥', '⬜'];
 
 function measurementToColors(data: number[], measurement: string) {
-  let min;
-  let max;
+  let min:number;
+  let max:number;
   let indicator;
   switch (measurement) {
     case 'temperature':
@@ -45,9 +45,9 @@ function measurementToColors(data: number[], measurement: string) {
   return coloredData;
 }
 
-export const rowStringToData = (rowString) => {
+export const rowStringToData = (rowString:string[]) => {
   // ToDo: check for the length of this and handle situations where there's empty space
-  const rowData = [];
+  const rowData:number[] = [];
   [...rowString].forEach((item, index) => {
     rowData[index] = characterCode[item];
   });

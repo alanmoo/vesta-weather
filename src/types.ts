@@ -11,3 +11,27 @@ export interface hourlyWeather {
   windSpeed: number;
   precipitation: number;
 }
+
+export interface WeatherKitHourlyForecast {
+    forecastStart: string,
+    cloudCover: number,
+    conditionCode: string,
+    daylight: boolean,
+    humidity: number,
+    precipitationAmount: number,
+    precipitationIntensity: number,
+    precipitationChance: number,
+    precipitationType: string,
+    pressure: number,
+    pressureTrend: string,
+    snowfallIntensity: number,
+    snowfallAmount: number,
+    temperature: number,
+    temperatureApparent: number,
+    temperatureDewPoint: number,
+    uvIndex: number,
+    visibility: number,
+    windDirection: number,
+    windGust: number,
+    windSpeed: number
+}

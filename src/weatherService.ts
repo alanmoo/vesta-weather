@@ -1,31 +1,17 @@
 import axios, { Method } from 'axios';
-import { hourlyWeather } from './types';
+import { hourlyWeather, WeatherKitHourlyForecast } from './types';
 
 require('dotenv').config();
 
-const darkSkyNormalization = (data) => {
-  const hourlyData = data.hourly.data;
-  const normalized: [hourlyWeather] = hourlyData.map((hour) => ({
-    time: hour.time,
-    temperature: hour.temperature,
-    humidity: hour.humidity,
-    windSpeed: hour.windSpeed,
-    precipitation: hour.precipProbability,
-  }));
-  return normalized;
-};
-
-const weatherKitNormalization = (data) => {
+const weatherKitNormalization = (data:any) => {
   const hourlyData = data.forecastHourly.hours;
-  console.log('Hourly data', hourlyData);
-  const normalized: [hourlyWeather] = hourlyData.map((hour) => ({
+  const normalized: [hourlyWeather] = hourlyData.map((hour:WeatherKitHourlyForecast) => ({
     time: hour.forecastStart,
     temperature: hour.temperature,
     humidity: hour.humidity,
     windSpeed: hour.windSpeed,
     precipitation: hour.precipitationChance,
   }));
-  console.log('normalized: ', normalized);
   return normalized;
 };
 
@@ -38,7 +24,6 @@ const fetchWeather = () => new Promise<[hourlyWeather]>((resolve, reject) => {
 
   axios(options).then((response) => {
     const { data } = response;
-    console.log('data is', data);
     if (data) {
       resolve(weatherKitNormalization(data));
     } else {

@@ -1,13 +1,27 @@
-import axios, { Method } from 'axios';
+import axios, { AxiosRequestHeaders, Method } from 'axios';
 import fetchWeather from './weatherService';
 import formatForVestaboard from './formatForVestaboard';
 import { hourlyWeather, MessageResponse } from './types';
 
 require('dotenv').config();
 
-const headers = {
-  'X-Vestaboard-Api-Key': process.env.VB_API_KEY,
-  'X-Vestaboard-Api-Secret': process.env.VB_API_SECRET,
+let VestaboardKey;
+if (process.env.VB_API_KEY) {
+  VestaboardKey = process.env.VB_API_KEY;
+} else {
+  throw new Error('VB_API_KEY environment variable is not set');
+}
+
+let VestaboardSecret;
+if (process.env.VB_API_SECRET) {
+  VestaboardSecret = process.env.VB_API_SECRET;
+} else {
+  throw new Error('VB_API_SECRET environment variable is not set');
+}
+
+const headers:AxiosRequestHeaders = {
+  'X-Vestaboard-Api-Key': VestaboardKey,
+  'X-Vestaboard-Api-Secret': VestaboardSecret,
 };
 
 const postToVestaboard = async (postMessage: string|number[][]): Promise<MessageResponse> => {
