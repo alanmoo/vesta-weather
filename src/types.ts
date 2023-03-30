@@ -5,15 +5,16 @@ export interface MessageResponse {
 }
 
 export interface hourlyWeather {
-  time: number;
-  temperature: number;
+  time: Date;
+  degreesFarenheit: number;
   humidity: number;
-  windSpeed: number;
+  windMph: number;
   precipitation: number;
+  cloudCover: number;
 }
 
 export interface WeatherKitHourlyForecast {
-    forecastStart: string,
+    forecastStart: Date,
     cloudCover: number,
     conditionCode: string,
     daylight: boolean,
@@ -34,4 +35,21 @@ export interface WeatherKitHourlyForecast {
     windDirection: number,
     windGust: number,
     windSpeed: number
+}
+
+export interface WeatherKitForecast {
+  forecastHourly:{
+    name: string,
+    metadata: {
+      attributionURL: string,
+      expireTime: Date,
+      latitude: number
+      longitude: number,
+      readTime: Date,
+      reportedTime: Date,
+      units: string,
+      version: 1
+    },
+    hours: [WeatherKitHourlyForecast]
+  }
 }

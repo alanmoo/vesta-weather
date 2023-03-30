@@ -29,6 +29,11 @@ function measurementToColors(data: number[], measurement: string) {
       max = 25;
       indicator = 'W';
       break;
+    case 'cloudCover':
+      min = 0.1;
+      max = 0.9;
+      indicator = 'C';
+      break;
     default:
       throw (new Error('Unknown measurement'));
   }
@@ -67,28 +72,31 @@ export const generateTimeRow = () => {
   return row;
 };
 
-const formatForVestaboard = (hourlyData: [hourlyWeather]) => {
-  const row1 = rowStringToData('NYC Weather           '.split(''));
+const formatForVestaboard = (hourlyData: hourlyWeather[]) => {
+  // const row1 = rowStringToData('NYC Weather           '.split(''));
   const timeRow = rowStringToData(generateTimeRow());
   const temperature: number[] = []; const humidity = []; const wind = []; const
-    precipitation = [];
+    precipitation = []; const cloudCover = [];
   for (let i = 0; i < vestaWidth - 1; i += 1) {
-    temperature.push(hourlyData[i].temperature);
+    temperature.push(hourlyData[i].degreesFarenheit);
     humidity.push(hourlyData[i].humidity);
-    wind.push(hourlyData[i].windSpeed);
+    wind.push(hourlyData[i].windMph);
     precipitation.push(hourlyData[i].precipitation);
+    cloudCover.push(hourlyData[i].cloudCover);
   }
   const tempRowStrings = measurementToColors(temperature, 'temperature');
   const humidityRowStrings = measurementToColors(humidity, 'humidity');
   const windRowStrings = measurementToColors(wind, 'wind');
   const precipRowStrings = measurementToColors(precipitation, 'precipitation');
+  const cloudRowStrings = measurementToColors(cloudCover, 'cloudCover');
 
   const tempRowData = rowStringToData(tempRowStrings);
   const humidityRowData = rowStringToData(humidityRowStrings);
   const windRowData = rowStringToData(windRowStrings);
   const precipRowData = rowStringToData(precipRowStrings);
+  const cloudRowData = rowStringToData(cloudRowStrings);
 
-  const res = [row1, tempRowData, humidityRowData, windRowData, precipRowData, timeRow];
+  const res = [tempRowData, humidityRowData, windRowData, precipRowData, cloudRowData, timeRow];
   return res;
 };
 

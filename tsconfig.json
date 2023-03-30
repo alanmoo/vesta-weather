@@ -7,4 +7,5 @@
         "strict": true,
         "esModuleInterop":true,
     },
+    "compileOnSave": true,
 }
