@@ -3,6 +3,7 @@ import { hourlyWeather, WeatherKitForecast, WeatherKitHourlyForecast } from './t
 
 require('dotenv').config();
 
+// Convert measurements into units that my brain works with
 export const weatherKitNormalization = (data:WeatherKitForecast):hourlyWeather[] => {
   const hourlyData = data.forecastHourly.hours;
   const normalized = hourlyData.map((hour:WeatherKitHourlyForecast) => ({
