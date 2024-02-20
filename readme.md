@@ -6,6 +6,10 @@ This is designed as a node function so that I could put it up on a web endpoint 
 
 ![Vestaboard representation of the weather](./vestaweather.png)
 
+[Video demo](https://www.youtube.com/shorts/_xjFq7M9njw)
+
 
 # Weatherkit API
-The AuthKey for Apple's Weatherkit service is in this repo locally, but not committed to GitHub for security reasons. To generate a new Auth Bearer token, execute `getWeatherkitToken.ts` (`ts-node src/getWeatherkitToken.ts` from the project directory). The console logged token can be used with the instructions on [Apple's Dev Center](https://developer.apple.com/documentation/weatherkitrestapi/request_authentication_for_weatherkit_rest_api)
+The AuthKey for Apple's Weatherkit service is in this repo locally, but not committed to GitHub for security reasons. To generate a new Auth Bearer token, execute `getWeatherkitToken.ts` (`ts-node src/getWeatherkitToken.ts` from the project directory). The console logged token can be used with the instructions on [Apple's Dev Center](https://developer.apple.com/documentation/weatherkitrestapi/request_authentication_for_weatherkit_rest_api).
+
+(Before shipping this to production for anyone but me I'd figure out a way to not need to do this manually)
